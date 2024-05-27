@@ -18,4 +18,8 @@ $(document).ready(function(){
 
   currentQuestion = questionGenerator();
   $('#equation').text(currentQuestion.equation);
+
+  $('#user-input').on('keyup', function () {
+    console.log($(this).val());
+  });
 });
