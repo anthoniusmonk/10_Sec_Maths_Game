@@ -1,3 +1,38 @@
-h2 {
-  color: blue;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Style the game elements */
+#time-left, #equation, #user-input, #score {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+#user-input {
+  font-size: 2rem;
+  padding: 0.5rem;
+  text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+body {
+  background-image: url("Images/frame-blackboard-with-notebooks.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  font-family: "Rubik Marker Hatch", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+h4, h3, h2, h1, p {
+  color: white;
 }
