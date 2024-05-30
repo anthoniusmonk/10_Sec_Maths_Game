@@ -39,17 +39,53 @@ $(document).ready(function(){
     }
   };
 
-  var randomNumberGenerator = function (size) {
-    return Math.ceil(Math.random() * size);
+  var randomNumberGenerator = function () {
+    return Math.ceil(Math.random() * 10);
   };
 
+  var getSelectedOperators = function () {
+    var selectedOperators = [];
+    if ($('#addition').is(':checked')) selectedOperators.push('+');
+    if ($('#subtraction').is(':checked')) selectedOperators.push('-');
+    if ($('#multiplication').is(':checked')) selectedOperators.push('*');
+    if ($('#division').is(':checked')) selectedOperators.push('/');
+    return selectedOperators;
+  }
+
   var questionGenerator = function () {
+    var selectedOperators = getSelectedOperators();
+    if (selectedOperators.length === 0) {
+      alert('Please select at least one selection type.');
+      return;
+    }
+
     var question = {};
     var num1 = randomNumberGenerator(10);
     var num2 = randomNumberGenerator(10);
+    var operator = selectedOperators[Math.floor(Math.random() * selectedOperators.length)];
 
-    question.answer = num1 + num2;
-    question.equation = String(num1) + " + " + String(num2);
+    switch (operator) {
+      case '+':
+        question.answer = num1 + num2;
+        question.equation = String(num1) + " + " + String(num2);
+        break;
+      case '-':
+        if (num1 < num2) {
+          [num1, num2] = [num2, num1];
+        }
+        question.answer = num1 - num2;
+        question.equation = String(num1) + " - " + String(num2);
+        break;
+      case '*':
+        question.answer = num1 * num2;
+        question.equation = String(num1) + " * " + String(num2);
+        break;
+      case '/':
+        num1 = num1 * num2; // Ensure num1 is a multiple of num2
+        question.answer = num1 / num2;
+        question.equation = String(num1) + " / " + String(num2);
+        break; 
+    }
 
     return question;
   };
@@ -74,5 +110,8 @@ $(document).ready(function(){
   });
 
   renderNewQuestion();
-});
 
+  $('#addition, #subtraction, #multiplication, #division').change(function() {
+    renderNewQuestion(); // Update the question when a checkbox is checked/unchecked
+  });
+});
