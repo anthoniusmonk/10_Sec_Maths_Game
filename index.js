@@ -2,6 +2,7 @@ $(document).ready(function(){
   var currentQuestion;
   var timeLeft = 10;
   var score = 0;
+  var highScore = 0;
   var interval;
 
   var updateTimeLeft = function (amount) {
@@ -12,7 +13,15 @@ $(document).ready(function(){
   var updateScore = function (amount) {
     score += amount;
     $('#score').text(score);
+    updateHighScore();
   };
+
+  var updateHighScore = function (amount) {
+    if (score > highScore) {
+      highScore = score;
+      $('#high-score').text(highScore);
+    }
+  }
 
   var startGame = function() {
     if (!interval) {
